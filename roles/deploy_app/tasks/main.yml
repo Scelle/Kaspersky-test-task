@@ -13,7 +13,7 @@
 
 - name: Deploy application deployment
   copy:
-    src: "{{ playbook_dir }}/deployment.yaml"
+    src: "{{ playbook_dir }}/roles/deploy_app/templates/deployment.yaml"
     dest: /home/{{ ansible_user }}/deployment.yaml
 
 - name: Apply deployment configuration
@@ -23,7 +23,7 @@
 
 - name: Deploy application service
   copy:
-    src: "{{ playbook_dir }}/service.yaml"
+    src: "{{ playbook_dir }}/roles/deploy_app/templates/service.yaml"
     dest: /home/{{ ansible_user }}/service.yaml
 
 - name: Apply service configuration

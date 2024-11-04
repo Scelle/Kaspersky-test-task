@@ -7,4 +7,4 @@
   shell: helm repo update
 
 - name: Install Prometheus using Helm
-  shell: helm install prometheus prometheus-community/prometheus -f {{ playbook_dir }}/setup_prometheus/values.yml
+  shell: helm install prometheus prometheus-community/prometheus -f {{ playbook_dir }}/roles/setup_prometheus/values.yml
