@@ -1,12 +1,5 @@
-- name: Add another user to docker group
-  command: usermod -aG docker {{ ansible_user }}
-  become: true
-
-- name: Apply docker group changes
-  shell: newgrp docker
-
 - name: Start Minikube cluster
-  shell: minikube start --driver=docker
+  shell: minikube start --driver=docker --force
   args:
     creates: /home/{{ ansible_user }}/.minikube
 
