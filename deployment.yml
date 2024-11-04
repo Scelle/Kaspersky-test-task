@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: system-info-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: system-info-app
+  template:
+    metadata:
+      labels:
+        app: system-info-app
+    spec:
+      containers:
+      - name: system-info-app
+        image: system-info-app
+        ports:
+        - containerPort: 5000
