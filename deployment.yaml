@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: system-info-app
-        image: system-info-app
+        image: scelle/system-info-app
         ports:
         - containerPort: 5000
