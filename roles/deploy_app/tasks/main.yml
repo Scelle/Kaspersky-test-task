@@ -1,0 +1,32 @@
+- name: Start Minikube cluster
+  shell: minikube start --driver=docker
+  args:
+    creates: /home/{{ ansible_user }}/.minikube
+
+- name: Set up Docker environment for Minikube
+  shell: eval $(minikube docker-env)
+  args:
+    executable: /bin/bash
+
+- name: Pull application Docker image
+  shell: docker pull scelle/system-info-app
+
+- name: Deploy application deployment
+  copy:
+    src: "{{ playbook_dir }}/deployment.yaml"
+    dest: /home/{{ ansible_user }}/deployment.yaml
+
+- name: Apply deployment configuration
+  shell: kubectl apply -f /home/{{ ansible_user }}/deployment.yaml
+  args:
+    executable: /bin/bash
+
+- name: Deploy application service
+  copy:
+    src: "{{ playbook_dir }}/service.yaml"
+    dest: /home/{{ ansible_user }}/service.yaml
+
+- name: Apply service configuration
+  shell: kubectl apply -f /home/{{ ansible_user }}/service.yaml
+  args:
+    executable: /bin/bash
