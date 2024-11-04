@@ -3,3 +3,4 @@
   roles:
     - install_tools
     - deploy_app
+    - setup_prometheus

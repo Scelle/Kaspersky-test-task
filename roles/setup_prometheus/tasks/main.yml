@@ -1,0 +1,10 @@
+- name: Add Prometheus community Helm repository
+  shell: helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+  args:
+    creates: /etc/helm/repository/prometheus-community
+
+- name: Update Helm repositories
+  shell: helm repo update
+
+- name: Install Prometheus using Helm
+  shell: helm install prometheus prometheus-community/prometheus -f {{ playbook_dir }}/install_prometheus/values.yml
