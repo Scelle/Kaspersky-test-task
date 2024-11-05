@@ -58,6 +58,6 @@
     state: restarted
 
 - name: Set up port forwarding for Ingress
-  shell: kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 80:80
+  shell: kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 8080:80
   async: 300
   poll: 0
