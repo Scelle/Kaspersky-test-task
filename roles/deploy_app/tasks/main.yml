@@ -30,3 +30,18 @@
   shell: kubectl apply -f /home/{{ ansible_user }}/service.yaml
   args:
     executable: /bin/bash
+
+- name: Enable Minikube Ingress addon
+  shell: minikube addons enable ingress
+  args:
+    creates: /root/.minikube/addons/ingress_enabled
+
+- name: Copy Ingress configuration
+  copy:
+    src: "{{ playbook_dir }}/roles/deploy_app/templates/ingress.yaml"
+    dest: /home/{{ ansible_user }}/ingress.yaml
+
+- name: Apply Ingress configuration
+  shell: kubectl apply -f /home/{{ ansible_user }}/ingress.yaml
+  args:
+    executable: /bin/bash
