@@ -36,6 +36,10 @@
   args:
     creates: /root/.minikube/addons/ingress_enabled
 
+- name: Wait for Ingress addon to initialize
+  pause:
+    seconds: 30
+
 - name: Copy Ingress configuration
   copy:
     src: "{{ playbook_dir }}/roles/deploy_app/templates/ingress.yaml"
