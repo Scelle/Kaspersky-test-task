@@ -4,4 +4,4 @@
     #- install_tools
     #- deploy_app
     - expose_ingress_controller
-    #- setup_monitoring
+    - setup_monitoring

@@ -6,6 +6,11 @@
 - name: Update Helm repositories
   shell: helm repo update
 
+- name: Install or upgrade Node Exporter using Helm
+  shell: helm upgrade --install node-exporter prometheus-community/prometheus-node-exporter
+  args:
+    executable: /bin/bash
+
 - name: Install or upgrade Prometheus using Helm
   shell: helm upgrade --install prometheus prometheus-community/prometheus -f {{ playbook_dir }}/roles/setup_monitoring/prometheus-values.yml
 
