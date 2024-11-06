@@ -7,7 +7,7 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
   hosts:
-    - grafana-intern.norafith.ru
+    - intern-grafana.norafith.ru
 
 datasources:
   prometheus:
