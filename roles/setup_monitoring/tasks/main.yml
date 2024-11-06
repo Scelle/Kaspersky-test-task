@@ -27,7 +27,7 @@
 
 - name: Expose Prometheus and Grafana via Ingress
   copy:
-    src: "{{ playbook_dir }}/roles/setup_prometheus/templates/prometheus-ingress.yaml"
+    src: "{{ playbook_dir }}/roles/setup_monitoring/templates/prometheus-ingress.yaml"
     dest: /home/{{ ansible_user }}/prometheus-ingress.yaml
   register: prometheus_ingress
 
@@ -37,7 +37,7 @@
 
 - name: Copy Grafana Ingress configuration
   copy:
-    src: "{{ playbook_dir }}/roles/setup_prometheus/templates/grafana-ingress.yaml"
+    src: "{{ playbook_dir }}/roles/setup_monitoring/templates/grafana-ingress.yaml"
     dest: /home/{{ ansible_user }}/grafana-ingress.yaml
   register: grafana_ingress
 
