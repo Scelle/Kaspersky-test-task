@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: prometheus-intern.norafith.ru
+    - host: intern-prometheus.norafith.ru
       http:
         paths:
           - path: /
