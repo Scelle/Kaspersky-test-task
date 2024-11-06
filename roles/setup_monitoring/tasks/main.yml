@@ -10,7 +10,7 @@
   shell: helm upgrade --install prometheus prometheus-community/prometheus -f {{ playbook_dir }}/roles/setup_monitoring/prometheus-values.yml
 
 - name: Install or upgrade Grafana using Helm
-  shell: helm upgrade --install grafana grafana/grafana -f {{ playbook_dir }}/roles/setup_prometheus/grafana-values.yml
+  shell: helm upgrade --install grafana grafana/grafana -f {{ playbook_dir }}/roles/setup_monitoring/grafana-values.yml
 
 - name: Expose Prometheus and Grafana via Ingress
   copy:
