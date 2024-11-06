@@ -7,20 +7,27 @@
   shell: helm repo update
 
 - name: Install or upgrade Prometheus using Helm
-  shell: helm upgrade --install prometheus prometheus-community/prometheus -f {{ playbook_dir }}/roles/setup_prometheus/values.yml
-
-- name: Install or upgrade Node Exporter using Helm
-  shell: helm upgrade --install node-exporter prometheus-community/prometheus-node-exporter -f {{ playbook_dir }}/roles/setup_monitoring/values_node_exporter.yml
+  shell: helm upgrade --install prometheus prometheus-community/prometheus -f {{ playbook_dir }}/roles/setup_monitoring/prometheus-values.yml
 
 - name: Install or upgrade Grafana using Helm
-  shell: helm upgrade --install grafana grafana/grafana -f {{ playbook_dir }}/roles/setup_monitoring/values_grafana.yml
+  shell: helm upgrade --install grafana grafana/grafana -f {{ playbook_dir }}/roles/setup_prometheus/grafana-values.yml
 
-- name: Create Grafana Service for external access
+- name: Expose Prometheus and Grafana via Ingress
   copy:
-    src: "{{ playbook_dir }}/roles/setup_monitoring/templates/grafana_service.yaml"
-    dest: /home/{{ ansible_user }}/grafana_service.yaml
+    src: "{{ playbook_dir }}/roles/setup_prometheus/templates/prometheus-ingress.yaml"
+    dest: /home/{{ ansible_user }}/prometheus-ingress.yaml
+  register: prometheus_ingress
 
-- name: Apply Grafana Service configuration
-  shell: kubectl apply -f /home/{{ ansible_user }}/grafana_service.yaml
-  args:
-    executable: /bin/bash
+- name: Apply Prometheus Ingress configuration
+  shell: kubectl apply -f /home/{{ ansible_user }}/prometheus-ingress.yaml
+  when: prometheus_ingress is changed
+
+- name: Copy Grafana Ingress configuration
+  copy:
+    src: "{{ playbook_dir }}/roles/setup_prometheus/templates/grafana-ingress.yaml"
+    dest: /home/{{ ansible_user }}/grafana-ingress.yaml
+  register: grafana_ingress
+
+- name: Apply Grafana Ingress configuration
+  shell: kubectl apply -f /home/{{ ansible_user }}/grafana-ingress.yaml
+  when: grafana_ingress is changed
