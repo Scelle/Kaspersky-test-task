@@ -57,7 +57,7 @@
     name: nginx
     state: restarted
 
-- name: Kill all kubectl port-forward processes
+- name: Kill all previous kubectl port-forward processes
   shell: pkill -f "kubectl port-forward"
   ignore_errors: true
 

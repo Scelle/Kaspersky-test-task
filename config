@@ -1,0 +1,12 @@
+[Unit]
+Description=Kubernetes Port Forward for Ingress Controller
+After=network.target
+
+[Service]
+Environment="KUBECONFIG=/home/scelle/.kube/config"
+ExecStart=/usr/local/bin/kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 80:80
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
