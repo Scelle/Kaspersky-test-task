@@ -39,18 +39,18 @@
     https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html#
 
 2. **Настройка Ansible-инвентаря**:
-   Добавьте IP-адреса или имена хостов для управления конфигурацией в файл инвентаря (если это требуется для распределенного окружения).
+    Добавьте IP-адреса или имена хостов для управления конфигурацией в файл инвентаря (если это требуется для распределенного окружения).
 
 3. **Запуск playbook Ansible**:
-   Запустите основной playbook для установки и настройки всех компонентов:
+    Запустите основной playbook для установки и настройки всех компонентов:
 
     ```ansible-playbook playbook.yml -i path/to/inventory/filename -u <username>```
 
 4. **Проверка развертывания**:
-   - Убедитесь, что доступ к сервисам настроен через указанные домены.
-   - App: `http://your-subdomain-for-app-service.your-domain.ru`.
-   - Prometheus: `http://your-subdomain-for-prometheus.your-domain.ru`.
-   - Grafana: `http://your-subdomain-for-grafana.your-domain.ru`.
+    - Убедитесь, что доступ к сервисам настроен через указанные домены.
+    - App: `http://your-subdomain-for-app-service.your-domain.ru`.
+    - Prometheus: `http://your-subdomain-for-prometheus.your-domain.ru`.
+    - Grafana: `http://your-subdomain-for-grafana.your-domain.ru`.
 
 
 
@@ -58,54 +58,56 @@
 
 1. **Создайте директорию для конфигурационного файла `kubectl`:**
 
-   sudo mkdir -p ~/.kube
+    ```sudo mkdir -p ~/.kube```
 
 2. **Сохраните текущую конфигурацию `kubectl` от Minikube:**
 
-   sudo minikube kubectl -- config view --flatten > ~/.kube/config
+    ```sudo minikube kubectl -- config view --flatten > ~/.kube/config```
 
 3. **Проверьте содержимое файла конфигурации `kubectl`:**
 
-   sudo kubectl config view
+    ```sudo kubectl config view```
 
 4. **Установите переменную окружения `KUBECONFIG`:**
 
-   export KUBECONFIG=~/.kube/config
+    ```export KUBECONFIG=~/.kube/config```
 
 5. **Проверьте подключение к нодам Kubernetes:**
 
-   kubectl get nodes
+    ```kubectl get nodes```
 
 6. **Настройте и перезапустите службу `systemd` для проброса портов:**
 
-   Откройте файл службы `k8s-port-forward.service` и убедитесь, что он настроен правильно:
+    Откройте файл службы `k8s-port-forward.service` и убедитесь, что он настроен правильно:
 
-   sudo nano /etc/systemd/system/k8s-port-forward.service
+      ```sudo nano /etc/systemd/system/k8s-port-forward.service```
 
-   Пример содержимого службы:
+    Пример содержимого службы:
 
-    ```
-    [Unit]
-    Description=Kubernetes Port Forward for Ingress Controller
-    After=network.target
-    
-    [Service]
-    Environment="KUBECONFIG=/home/<username>/.kube/config"
-    ExecStart=/usr/local/bin/kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 5000:80
-    Restart=always
-    
-    [Install]
-    WantedBy=multi-user.target
-    ```
+      ```
+      [Unit]
+      Description=Kubernetes Port Forward for Ingress Controller
+      After=network.target
+      
+      [Service]
+      Environment="KUBECONFIG=/home/<username>/.kube/config"
+      ExecStart=/usr/local/bin/kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 5000:80
+      Restart=always
+      
+      [Install]
+      WantedBy=multi-user.target
+      ```
 
-   Убедитесь, что `<username>` заменён на ваше имя пользователя.
+    Убедитесь, что `<username>` заменён на ваше имя пользователя.
 
 7. **Перезагрузите конфигурацию `systemd`, включите и запустите службу:**
 
-   sudo systemctl daemon-reload
-   sudo systemctl enable k8s-port-forward.service
-   sudo systemctl start k8s-port-forward.service
+    ```
+    sudo systemctl daemon-reload
+    sudo systemctl enable k8s-port-forward.service
+    sudo systemctl start k8s-port-forward.service
+    ```
 
 8. **Проверьте статус службы:**
 
-   sudo systemctl status k8s-port-forward.service
+    ```sudo systemctl status k8s-port-forward.service```
