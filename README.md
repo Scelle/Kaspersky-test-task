@@ -1,8 +1,8 @@
-# Проект по автоматизированному развертыванию системы мониторинга с использованием Ansible, Minikube, Prometheus и Grafana
+# Проект по автоматизации развертывания приложения и системы мониторинга с использованием Ansible, Minikube, Nginx, Prometheus и Grafana
 
 ## Описание проекта
 
-Данный проект представляет собой инфраструктурное решение для автоматизированного развёртывания системы мониторинга на локальном кластере Kubernetes с использованием Minikube. Инструменты мониторинга включают Prometheus и Grafana, настроенные для сбора метрик с приложений и узлов кластера. Все шаги выполнены с помощью сценариев Ansible, которые автоматизируют установку, настройку и деплой необходимых сервисов.
+Данный проект представляет собой инфраструктурное решение для автоматизированного развёртывания приложения и системы мониторинга в локальном кластере Kubernetes с использованием Minikube. Инструменты мониторинга включают Prometheus и Grafana, настроенные для сбора метрик с приложений и узлов кластера. Все шаги выполнены с помощью сценариев Ansible, которые автоматизируют установку, настройку и деплой необходимых сервисов.
 
 Доступные сервисы:
 
@@ -16,9 +16,9 @@
 
 - **Ansible**: Используется для автоматизации всех этапов установки и настройки.
 - **Minikube**: Локальный кластер Kubernetes, позволяющий разворачивать контейнеризированные приложения.
+- **Nginx**: Используется в качестве обратного прокси для внешнего доступа к сервисам через домены.
 - **Prometheus**: Система мониторинга и алертинга, настроенная на сбор метрик с узлов кластера и приложений.
 - **Grafana**: Платформа визуализации данных, интегрированная с Prometheus для отображения метрик.
-- **Nginx**: Используется в качестве обратного прокси для внешнего доступа к сервисам через домены.
 
 ## Структура проекта
 
@@ -44,7 +44,7 @@
 3. **Запуск playbook Ansible**:
    Запустите основной playbook для установки и настройки всех компонентов:
 
-    ansible-playbook playbook.yml -i path/to/inventory/filename -u <username>
+    ```ansible-playbook playbook.yml -i path/to/inventory/filename -u <username>```
 
 4. **Проверка развертывания**:
    - Убедитесь, что доступ к сервисам настроен через указанные домены.
@@ -85,17 +85,17 @@
    Пример содержимого службы:
 
     ```
-        [Unit]
-        Description=Kubernetes Port Forward for Ingress Controller
-        After=network.target
-
-        [Service]
-        Environment="KUBECONFIG=/home/<username>/.kube/config"
-        ExecStart=/usr/local/bin/kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 5000:80
-        Restart=always
-
-        [Install]
-        WantedBy=multi-user.target
+    [Unit]
+    Description=Kubernetes Port Forward for Ingress Controller
+    After=network.target
+    
+    [Service]
+    Environment="KUBECONFIG=/home/<username>/.kube/config"
+    ExecStart=/usr/local/bin/kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 5000:80
+    Restart=always
+    
+    [Install]
+    WantedBy=multi-user.target
     ```
 
    Убедитесь, что `<username>` заменён на ваше имя пользователя.
