@@ -62,7 +62,8 @@
 
 2. **Сохраните текущую конфигурацию `kubectl` от Minikube:**
 
-    ```sudo minikube kubectl -- config view --flatten > ~/.kube/config```
+    ```sudo minikube kubectl -- config view --flatten | sudo tee ~/.kube/config > /dev/null```
+
 
 3. **Проверьте содержимое файла конфигурации `kubectl`:**
 

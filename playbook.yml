@@ -1,7 +1,7 @@
 - hosts: localhost
   become: true
   roles:
-    #- install_tools
-    #- deploy_app
+    - install_tools
+    - deploy_app
     - expose_ingress_controller
     - setup_monitoring

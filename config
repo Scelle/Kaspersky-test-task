@@ -4,9 +4,8 @@ After=network.target
 
 [Service]
 Environment="KUBECONFIG=/home/scelle/.kube/config"
-ExecStart=/usr/local/bin/kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 80:80
+ExecStart=/usr/local/bin/kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 5000:80
 Restart=always
-RestartSec=10
 
 [Install]
 WantedBy=multi-user.target
