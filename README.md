@@ -60,7 +60,7 @@
 
     ```sudo mkdir -p ~/.kube```
 
-2. **Сохраните текущую конфигурацию `kubectl` от Minikube:**
+2. **Сохраните текущую конфигурацию `kubectl` от Minikube:** ### НЕ НУЖНО
 
     ```sudo minikube kubectl -- config view --flatten | sudo tee ~/.kube/config > /dev/null```
 
