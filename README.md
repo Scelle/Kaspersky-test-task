@@ -8,7 +8,7 @@
 
 - **Sytem info app**: [http://service.scelle.ru]
 - **Prometheus**: [http://prometheus.scelle.ru]
-- **Grafana**: [http://grafana.scelle.ru]
+- **Grafana**: [http://grafana.scelle.ru] (login: admin password: etc6OT00p4tkpZPEUzrxkgltS0BdMJbWYns4xbtd)
 
 
 
