@@ -8,7 +8,7 @@
 
 - **Sytem info app**: [http://intern-service.norafith.ru]
 - **Prometheus**: [http://prometheus-intern.norafith.ru]
-- **Grafana**: [http://grafana-intern.norafith.ru]
+- **Grafana**: [http://grafana-intern.norafith.ru] (login: admin password: YKAgoo1DyzBolSy6FIfyXKHWgX7IP1gTP7LISozn)
 
 
 
