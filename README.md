@@ -6,9 +6,9 @@
 
 Доступные сервисы:
 
-- **Sytem info app**: [http://intern-service.norafith.ru]
-- **Prometheus**: [http://prometheus-intern.norafith.ru]
-- **Grafana**: [http://grafana-intern.norafith.ru] (login: admin password: YKAgoo1DyzBolSy6FIfyXKHWgX7IP1gTP7LISozn)
+- **Sytem info app**: [http://service.scelle.ru]
+- **Prometheus**: [http://prometheus.scelle.ru]
+- **Grafana**: [http://grafana.scelle.ru]
 
 
 
